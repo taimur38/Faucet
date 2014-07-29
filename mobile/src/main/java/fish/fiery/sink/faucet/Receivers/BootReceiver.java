@@ -1,8 +1,10 @@
-package fish.fiery.sink.faucet;
+package fish.fiery.sink.faucet.Receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import fish.fiery.sink.faucet.MasterService;
 
 /**
  * Created by Taimur on 7/27/2014.

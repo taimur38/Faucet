@@ -8,14 +8,13 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
+
+import fish.fiery.sink.faucet.Pollers.AppTracker;
+import fish.fiery.sink.faucet.Pollers.Poller;
 
 public class MasterService extends Service {
     public MasterService() {

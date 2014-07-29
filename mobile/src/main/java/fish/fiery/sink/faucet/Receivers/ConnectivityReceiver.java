@@ -1,4 +1,4 @@
-package fish.fiery.sink.faucet;
+package fish.fiery.sink.faucet.Receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,6 +8,9 @@ import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 
 import java.util.Calendar;
+
+import fish.fiery.sink.faucet.API;
+import fish.fiery.sink.faucet.States.ConnectivityState;
 
 /**
  * Created by Taimur on 7/27/2014.

@@ -1,4 +1,4 @@
-package fish.fiery.sink.faucet;
+package fish.fiery.sink.faucet.Receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.BatteryManager;
 
 import java.util.Calendar;
+
+import fish.fiery.sink.faucet.API;
+import fish.fiery.sink.faucet.States.BatteryState;
 
 /**
  * Created by Taimur on 7/26/2014.

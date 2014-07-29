@@ -29,19 +29,19 @@
             android:exported="true" >
         </service>
 
-        <receiver android:name=".BatteryReceiver">
+        <receiver android:name=".Receivers.BatteryReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BATTERY_CHANGED"></action>
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".BootReceiver">
+        <receiver android:name=".Receivers.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"></action>
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".ConnectivityReceiver">
+        <receiver android:name=".Receivers.ConnectivityReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"></action>
             </intent-filter>

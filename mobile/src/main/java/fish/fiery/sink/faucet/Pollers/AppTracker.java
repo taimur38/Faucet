@@ -1,4 +1,4 @@
-package fish.fiery.sink.faucet;
+package fish.fiery.sink.faucet.Pollers;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -7,6 +7,9 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
+import fish.fiery.sink.faucet.API;
+import fish.fiery.sink.faucet.States.AppState;
 
 /**
  * Created by Taimur on 7/27/2014.

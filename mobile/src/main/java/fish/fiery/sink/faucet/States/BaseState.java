@@ -1,4 +1,4 @@
-package fish.fiery.sink.faucet;
+package fish.fiery.sink.faucet.States;
 
 import com.google.gson.annotations.Expose;
 

@@ -12,6 +12,10 @@ import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import fish.fiery.sink.faucet.States.AppState;
+import fish.fiery.sink.faucet.States.BatteryState;
+import fish.fiery.sink.faucet.States.ConnectivityState;
+
 /**
  * Created by Taimur on 7/26/2014.
  */
