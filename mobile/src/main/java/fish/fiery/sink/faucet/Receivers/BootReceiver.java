@@ -17,6 +17,5 @@ public class BootReceiver extends BroadcastReceiver {
         Intent app_tracker_intent = new Intent(context, MasterService.class);
         context.startService(app_tracker_intent);
 
-
     }
 }

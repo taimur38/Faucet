@@ -5,6 +5,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.widget.Toast;
 
@@ -15,6 +19,7 @@ import java.util.concurrent.ScheduledFuture;
 
 import fish.fiery.sink.faucet.Pollers.AppTracker;
 import fish.fiery.sink.faucet.Pollers.Poller;
+import fish.fiery.sink.faucet.Receivers.LocationReceiver;
 
 public class MasterService extends Service {
     public MasterService() {
@@ -27,12 +32,17 @@ public class MasterService extends Service {
 
         Toast.makeText(getApplicationContext(), "started tracking service", Toast.LENGTH_LONG).show();
 
-        // initialize all pollers. TODO: use reflection
+        // TODO: use reflection to initialize all pollers.
 
         AppTracker appTracker = new AppTracker(getApplicationContext());
         ScheduledFuture appFuture = appScheduler.scheduleAtFixedRate(appTracker, appTracker.Delay, appTracker.Interval, appTracker.Units);
 
         ScheduledTasks.put(appTracker, appFuture);
+
+        LocationManager locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        LocationReceiver locationReceiver = new LocationReceiver();
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationReceiver);
 
         registerReceiver(new BroadcastReceiver() {
             @Override

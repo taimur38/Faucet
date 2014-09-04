@@ -17,9 +17,7 @@ public class AppState extends BaseState {
         Duration = duration;
     }
 
-    @Expose
     public String Name;
-    @Expose
     public long Duration;
 
 }

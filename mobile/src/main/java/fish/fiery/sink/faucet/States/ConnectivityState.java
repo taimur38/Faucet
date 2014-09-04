@@ -18,7 +18,7 @@ public class ConnectivityState extends BaseState{
     }
 
 
-    @Expose public String NetworkType;
-    @Expose public boolean WiFiConn;
-    @Expose public boolean WiFiAvailable;
+    public String NetworkType;
+    public boolean WiFiConn;
+    public boolean WiFiAvailable;
 }

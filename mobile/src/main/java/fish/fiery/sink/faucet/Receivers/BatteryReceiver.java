@@ -29,6 +29,6 @@ public class BatteryReceiver extends BroadcastReceiver {
 
         BatteryState state = new BatteryState(pct, charging, Calendar.getInstance().getTime());
 
-        API.PostBatteryState(state);
+        new API().PostBatteryState(state);
     }
 }

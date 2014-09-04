@@ -19,14 +19,12 @@ public class AppTracker extends Poller {
     public AppTracker(Context context) {
         super(context, 0, 1, TimeUnit.SECONDS);
 
-        _calendar = Calendar.getInstance();
-        _start = _calendar.getTime();
+        _start = Calendar.getInstance().getTime();
         _previous = getForegroundTask();
     }
 
     private String _previous;
     private Date _start;
-    private Calendar _calendar;
 
     @Override
     public void run() {
@@ -42,8 +40,8 @@ public class AppTracker extends Poller {
 
     public void AppEnd()
     {
-        Date now = _calendar.getTime();
-        API.PostAppState(new AppState(_previous, _start, now.getTime() - _start.getTime()));        //TODO: make these async
+        Date now = Calendar.getInstance().getTime();
+        new API().PostAppState(new AppState(_previous, _start, now.getTime() - _start.getTime()));        //TODO: make these async
         _start = now;
     }
 
