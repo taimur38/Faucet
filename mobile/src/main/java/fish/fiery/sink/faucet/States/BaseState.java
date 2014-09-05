@@ -13,13 +13,13 @@ public class BaseState {
 
     public BaseState(Date startDate) {
 
-        StartDate = startDate;
+        Date = startDate;
         DeviceName = Build.MODEL;
         DeviceType = Device.Phone;
 
     }
 
-    public Date StartDate;
+    public Date Date;
     public String DeviceName;
     public Device DeviceType;
 

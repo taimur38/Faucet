@@ -25,8 +25,10 @@ public class BatteryReceiver extends BroadcastReceiver {
         if(max >= 0 && level >= 0)
             pct = (level * 100d) / max;
 
-        boolean charging = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) == 0;
+        int charging_data = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
 
+        boolean charging = (charging_data == BatteryManager.BATTERY_PLUGGED_AC) || (charging_data == BatteryManager.BATTERY_PLUGGED_USB) || (charging_data == BatteryManager.BATTERY_PLUGGED_WIRELESS);
+        
         BatteryState state = new BatteryState(pct, charging, Calendar.getInstance().getTime());
 
         new API().PostBatteryState(state);

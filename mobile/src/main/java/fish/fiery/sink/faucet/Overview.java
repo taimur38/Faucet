@@ -1,6 +1,7 @@
 package fish.fiery.sink.faucet;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +14,8 @@ public class Overview extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
+        Intent intent = new Intent(this, MasterService.class);
+        startService(intent);
     }
 
 

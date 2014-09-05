@@ -19,7 +19,7 @@ public class LocationReceiver implements LocationListener {
     private Location _prevLocation;
     private Date _prevDate;
     private final long TIME_THRESHOLD = 1000 * 60 * 10;
-    private final double ACCURACY_THRESHOLD = 1000; //meters of overlap allowed
+    private final double ACCURACY_THRESHOLD = 0; //meters of overlap allowed
 
     public LocationReceiver() {
         _prevLocation = null;
@@ -50,6 +50,9 @@ public class LocationReceiver implements LocationListener {
     }
 
     public void Save(Location location, Date date) {
+
+        _prevDate = date;
+        _prevLocation = location;
 
         LocationState state = new LocationState(location.getLatitude(), location.getLongitude(), location.getSpeed(), location.getAccuracy(), location.getAltitude(), date);
         new API().PostLocationState(state);

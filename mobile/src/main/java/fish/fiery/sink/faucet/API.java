@@ -30,7 +30,11 @@ public class API {
     private void PostJson(String url, Object obj) {
 
         String json = new Gson().toJson(obj);
+        Log.d(TAG, json);
+
         new JsonPoster().execute(url, json);
+
+        //`new JsonPoster().execute(url, json);
 
     }
 

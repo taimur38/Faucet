@@ -10,6 +10,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -19,6 +20,7 @@ import java.util.concurrent.ScheduledFuture;
 
 import fish.fiery.sink.faucet.Pollers.AppTracker;
 import fish.fiery.sink.faucet.Pollers.Poller;
+import fish.fiery.sink.faucet.Receivers.BatteryReceiver;
 import fish.fiery.sink.faucet.Receivers.LocationReceiver;
 
 public class MasterService extends Service {
@@ -31,6 +33,7 @@ public class MasterService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         Toast.makeText(getApplicationContext(), "started tracking service", Toast.LENGTH_LONG).show();
+        Log.d("MASTER", "started shit");
 
         // TODO: use reflection to initialize all pollers.
 
@@ -43,6 +46,8 @@ public class MasterService extends Service {
         LocationReceiver locationReceiver = new LocationReceiver();
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationReceiver);
+
+        registerReceiver(new BatteryReceiver(), new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         registerReceiver(new BroadcastReceiver() {
             @Override
