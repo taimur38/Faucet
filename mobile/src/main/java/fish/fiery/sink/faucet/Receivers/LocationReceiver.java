@@ -55,7 +55,7 @@ public class LocationReceiver implements LocationListener {
         _prevLocation = location;
 
         LocationState state = new LocationState(location.getLatitude(), location.getLongitude(), location.getSpeed(), location.getAccuracy(), location.getAltitude(), date);
-        new API().PostLocationState(state);
+        new API().QueueState(state);
 
     }
 

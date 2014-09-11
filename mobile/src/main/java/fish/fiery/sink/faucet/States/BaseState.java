@@ -17,10 +17,14 @@ public class BaseState {
         DeviceName = Build.MODEL;
         DeviceType = Device.Phone;
 
+        Type = this.getClass().getSimpleName();
+
     }
 
     public Date Date;
     public String DeviceName;
     public Device DeviceType;
+
+    public String Type;
 
 }

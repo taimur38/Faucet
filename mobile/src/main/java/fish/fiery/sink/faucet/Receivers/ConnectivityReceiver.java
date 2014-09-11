@@ -53,7 +53,7 @@ public class ConnectivityReceiver extends BroadcastReceiver {
         }
 
         ConnectivityState state = new ConnectivityState(NetworkType, WiFiConn, wifiAvail, Calendar.getInstance().getTime());
-        new API().PostConnectivityState(state);
+        new API().QueueState(state);
 
     }
 }

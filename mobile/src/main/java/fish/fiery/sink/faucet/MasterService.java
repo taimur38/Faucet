@@ -14,12 +14,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 
 import fish.fiery.sink.faucet.Pollers.AppTracker;
 import fish.fiery.sink.faucet.Pollers.Poller;
+import fish.fiery.sink.faucet.Pollers.PostPoller;
 import fish.fiery.sink.faucet.Receivers.BatteryReceiver;
 import fish.fiery.sink.faucet.Receivers.LocationReceiver;
 
@@ -39,6 +41,10 @@ public class MasterService extends Service {
 
         AppTracker appTracker = new AppTracker(getApplicationContext());
         ScheduledFuture appFuture = appScheduler.scheduleAtFixedRate(appTracker, appTracker.Delay, appTracker.Interval, appTracker.Units);
+        PostPoller poller = new PostPoller(getApplicationContext());
+
+        ScheduledExecutorService pollerScheduler = Executors.newSingleThreadScheduledExecutor();
+        ScheduledFuture pollerFuture = pollerScheduler.scheduleAtFixedRate(poller, poller.Delay, poller.Interval, poller.Units);
 
         ScheduledTasks.put(appTracker, appFuture);
 

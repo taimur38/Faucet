@@ -41,7 +41,7 @@ public class AppTracker extends Poller {
     public void AppEnd()
     {
         Date now = Calendar.getInstance().getTime();
-        new API().PostAppState(new AppState(_previous, _start, now.getTime() - _start.getTime()));        //TODO: make these async
+        new API().QueueState(new AppState(_previous, _start, now.getTime() - _start.getTime()));        //TODO: make these async
         _start = now;
     }
 
