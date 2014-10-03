@@ -7,8 +7,8 @@ import android.os.BatteryManager;
 
 import java.util.Calendar;
 
-import fish.fiery.sink.faucet.API;
-import fish.fiery.sink.faucet.States.BatteryState;
+import fish.metal.library.API;
+import fish.metal.library.States.BatteryState;
 
 /**
  * Created by Taimur on 7/26/2014.

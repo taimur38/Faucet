@@ -6,7 +6,7 @@ import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
 
-import fish.fiery.sink.faucet.API;
+import fish.metal.library.API;
 
 /**
  * Created by Taimur on 9/5/2014.

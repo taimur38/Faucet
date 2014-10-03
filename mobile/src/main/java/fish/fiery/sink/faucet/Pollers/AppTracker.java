@@ -8,8 +8,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import fish.fiery.sink.faucet.API;
-import fish.fiery.sink.faucet.States.AppState;
+import fish.metal.library.API;
+import fish.metal.library.States.AppState;
 
 /**
  * Created by Taimur on 7/27/2014.

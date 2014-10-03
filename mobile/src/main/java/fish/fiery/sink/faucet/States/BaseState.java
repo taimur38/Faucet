@@ -4,7 +4,7 @@ import android.os.Build;
 
 import java.util.Date;
 
-import fish.fiery.sink.faucet.Device;
+import fish.metal.library.Device;
 
 /**
  * Created by Taimur on 7/29/2014.
@@ -13,18 +13,14 @@ public class BaseState {
 
     public BaseState(Date startDate) {
 
-        Date = startDate;
+        StartDate = startDate;
         DeviceName = Build.MODEL;
         DeviceType = Device.Phone;
 
-        Type = this.getClass().getSimpleName();
-
     }
 
-    public Date Date;
+    public Date StartDate;
     public String DeviceName;
     public Device DeviceType;
-
-    public String Type;
 
 }

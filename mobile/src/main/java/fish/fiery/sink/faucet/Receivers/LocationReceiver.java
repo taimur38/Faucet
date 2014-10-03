@@ -1,6 +1,5 @@
 package fish.fiery.sink.faucet.Receivers;
 
-import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
@@ -8,8 +7,8 @@ import android.os.Bundle;
 import java.util.Calendar;
 import java.util.Date;
 
-import fish.fiery.sink.faucet.API;
-import fish.fiery.sink.faucet.States.LocationState;
+import fish.metal.library.API;
+import fish.metal.library.States.LocationState;
 
 /**
  * Created by Taimur on 9/2/2014.

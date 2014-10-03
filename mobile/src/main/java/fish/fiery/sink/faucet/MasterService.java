@@ -5,16 +5,25 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.wearable.DataEvent;
+import com.google.android.gms.wearable.DataEventBuffer;
+import com.google.android.gms.wearable.DataMap;
+import com.google.android.gms.wearable.DataMapItem;
+import com.google.android.gms.wearable.MessageApi;
+import com.google.android.gms.wearable.MessageEvent;
+import com.google.android.gms.wearable.Node;
+import com.google.android.gms.wearable.Wearable;
+import com.google.android.gms.wearable.WearableListenerService;
+
 import java.util.HashMap;
-import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -24,13 +33,16 @@ import fish.fiery.sink.faucet.Pollers.Poller;
 import fish.fiery.sink.faucet.Pollers.PostPoller;
 import fish.fiery.sink.faucet.Receivers.BatteryReceiver;
 import fish.fiery.sink.faucet.Receivers.LocationReceiver;
+import fish.metal.library.API;
 
-public class MasterService extends Service {
+public class MasterService extends WearableListenerService implements GoogleApiClient.ConnectionCallbacks, MessageApi.MessageListener {
     public MasterService() {
     }
 
     private static HashMap<Poller, ScheduledFuture> ScheduledTasks = new HashMap<Poller, ScheduledFuture>();
     private static ScheduledExecutorService appScheduler = Executors.newSingleThreadScheduledExecutor();
+
+    GoogleApiClient client;
 
     public int onStartCommand(Intent intent, int flags, int startId) {
 
@@ -54,6 +66,19 @@ public class MasterService extends Service {
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationReceiver);
 
         registerReceiver(new BatteryReceiver(), new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+
+        client = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(new GoogleApiClient.OnConnectionFailedListener() {
+                    @Override
+                public void onConnectionFailed(ConnectionResult result) {
+                        Log.d("API CLIENT", "failed: " + result);
+                    }
+                })
+                .addApi(Wearable.API)
+                .build();
+
+        client.connect();
 
         registerReceiver(new BroadcastReceiver() {
             @Override
@@ -79,9 +104,31 @@ public class MasterService extends Service {
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
+    public void onMessageReceived(MessageEvent messageEvent) {
 
-        throw new UnsupportedOperationException("Not yet implemented");
+        String json = messageEvent.getPath();
+        Log.d("MESSAGE", json);
+        new API().QueueJson(json);
+    }
+
+    @Override
+    public void onPeerConnected(Node peer) {
+        super.onPeerConnected(peer);
+
+        String id = peer.getId();
+        String name = peer.getDisplayName();
+
+        Log.d("connect", id + " " + name);
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        Wearable.MessageApi.addListener(client, this);
+        Log.d("API CLIENT", "connected");
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        Log.d("API CLIENT", "connection suspended");
     }
 }

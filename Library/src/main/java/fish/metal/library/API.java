@@ -1,4 +1,4 @@
-package fish.fiery.sink.faucet;
+package fish.metal.library;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -12,14 +12,8 @@ import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-
-import fish.fiery.sink.faucet.States.AppState;
-import fish.fiery.sink.faucet.States.BatteryState;
-import fish.fiery.sink.faucet.States.ConnectivityState;
-import fish.fiery.sink.faucet.States.LocationState;
 
 /**
  * Created by Taimur on 7/26/2014.
@@ -40,6 +34,10 @@ public class API {
         Posts.add(new JsonPost(json));
 
         //new JsonPoster().execute(root + "state", json);
+    }
+
+    public void QueueJson(String json) {
+        Posts.add(new JsonPost(json));
     }
 
     public void PostJson() {

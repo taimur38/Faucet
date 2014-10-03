@@ -9,8 +9,8 @@ import android.telephony.TelephonyManager;
 
 import java.util.Calendar;
 
-import fish.fiery.sink.faucet.API;
-import fish.fiery.sink.faucet.States.ConnectivityState;
+import fish.metal.library.API;
+import fish.metal.library.States.ConnectivityState;
 
 /**
  * Created by Taimur on 7/27/2014.

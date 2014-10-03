@@ -1,4 +1,4 @@
-package fish.fiery.sink.faucet;
+package fish.metal.library;
 
 /**
  * Created by Taimur on 7/29/2014.
