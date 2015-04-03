@@ -22,6 +22,7 @@ import java.util.Date;
 
 import fish.metal.library.Device;
 import fish.metal.library.States.HeartState;
+import fish.metal.mymodule.app.Messenger;
 
 /**
  * Created by Taimur on 9/17/2014.
@@ -32,12 +33,17 @@ public class HeartRateReceiver implements SensorEventListener {
     private int total;
     private int count = 0;
     private final int MAX = 10;
+    private Date _threshhold;
     private GoogleApiClient _client;
 
     public HeartRateReceiver(SensorManager sm, GoogleApiClient client)
     {
         _manager = sm;
         _client = client;
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MINUTE, 3);
+
+        _threshhold = cal.getTime();
     }
 
     @Override
@@ -47,6 +53,9 @@ public class HeartRateReceiver implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
+
+        if(Calendar.getInstance().after(_threshhold))
+            _manager.unregisterListener(this);
 
         if(sensorEvent.accuracy < 2)
             return;
@@ -64,21 +73,7 @@ public class HeartRateReceiver implements SensorEventListener {
             String json = new Gson().toJson(state);
             //send it to phone
 
-            new AsyncTask<String, Void, Void>() {
-                @Override
-                protected Void doInBackground(String... params) {
-                    String json = params[0];
-                    NodeApi.GetConnectedNodesResult nodes = Wearable.NodeApi.getConnectedNodes(_client).await(); //TODO: abstract this
-                    for(Node node : nodes.getNodes()) {
-                        MessageApi.SendMessageResult result = Wearable.MessageApi.sendMessage(_client, node.getId(), json, null).await();
-                        Log.d("message", result.toString());
-                    }
-
-                    return null;
-                }
-            }.execute(json);
-
-
+            new Messenger().SendJson(json, _client);
 
             _manager.unregisterListener(this);
         }

@@ -58,7 +58,7 @@ public class WearService extends Service {
 
         client.connect();
 
-        registerReceiver(new BatteryReceiver(), new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        registerReceiver(new BatteryReceiver(client), new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         ScheduledExecutorService heartScheduler = Executors.newSingleThreadScheduledExecutor();
         heartScheduler.scheduleAtFixedRate(new Runnable() {
@@ -85,5 +85,12 @@ public class WearService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        Log.d("DESTROY", "service killed");
     }
 }
